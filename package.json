@@ -1,0 +1,15 @@
+{
+  "name": "meeting-time-zone-planner",
+  "version": "1.0.0",
+  "description": "Find the hours when everyone on a call is inside their working day, across time zones.",
+  "type": "module",
+  "scripts": {
+    "test": "node --test \"tests/**/*.test.mjs\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ansab-imam/meeting-time-zone-planner.git"
+  },
+  "author": "ansab-imam",
+  "license": "MIT"
+}

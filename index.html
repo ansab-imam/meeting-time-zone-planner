@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Meeting Time Zone Planner</title>
+  <meta name="description" content="Find the hours when everyone on a call is inside their working day, across time zones.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <h1>Meeting Time Zone Planner</h1>
+    <p>Add everyone on the call and see when all of you are inside working hours. Everything runs in your browser.</p>
+  </header>
+
+  <main class="layout">
+    <form id="plan-form" class="panel" novalidate>
+      <section aria-labelledby="day-heading">
+        <h2 id="day-heading">Day</h2>
+        <div class="grid">
+          <label class="field"><span>Date</span><input id="date" type="date"></label>
+          <label class="field"><span>Show times in</span><select id="baseZone" class="zone-select"></select></label>
+        </div>
+        <label class="check"><input id="skipWeekends" type="checkbox" checked> Treat Saturday and Sunday as days off</label>
+      </section>
+
+      <section aria-labelledby="people-heading">
+        <h2 id="people-heading">People</h2>
+        <div id="people" class="people"></div>
+        <button type="button" class="btn btn-ghost" id="add-person">+ Add person</button>
+      </section>
+
+      <div class="actions">
+        <button type="button" class="btn btn-ghost" id="reset">Reset</button>
+      </div>
+    </form>
+
+    <aside class="panel results" aria-live="polite">
+      <p id="error" class="error" hidden></p>
+      <div id="output">
+        <section>
+          <h2>Times that work for everyone</h2>
+          <ul id="windows" class="windows"></ul>
+          <p id="none" class="none" hidden>No overlap on this day. Try another date, or stretch someone's hours.</p>
+          <button type="button" class="btn" id="copy">Copy summary</button>
+          <p id="copy-status" class="muted" role="status"></p>
+        </section>
+      </div>
+    </aside>
+
+    <section class="panel timeline-panel" aria-labelledby="timeline-heading">
+      <h2 id="timeline-heading">The whole day</h2>
+      <p class="muted">Each column is 30 minutes in <strong id="base-label"></strong>. Hover a cell to see that person's local time.</p>
+      <div class="timeline-scroll">
+        <table id="timeline" class="timeline"></table>
+      </div>
+      <p class="legend">
+        <span><i class="key work"></i> Working</span>
+        <span><i class="key off"></i> Off</span>
+        <span><i class="key both"></i> Everyone free</span>
+      </p>
+    </section>
+  </main>
+
+  <template id="person-row">
+    <div class="person">
+      <label class="field"><span>Name</span><input class="p-name" type="text" maxlength="40"></label>
+      <label class="field"><span>Time zone</span><select class="p-zone zone-select"></select></label>
+      <label class="field"><span>Starts</span><input class="p-start" type="time" step="900"></label>
+      <label class="field"><span>Ends</span><input class="p-end" type="time" step="900"></label>
+      <button type="button" class="icon-btn p-remove" aria-label="Remove person">×</button>
+    </div>
+  </template>
+
+  <script src="timezones.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
